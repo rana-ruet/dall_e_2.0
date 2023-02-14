@@ -5,6 +5,8 @@ import { preview } from '../assets';
 import { getRandomPrompt } from '../utils';
 import { FormField, Loader } from '../components';
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 const CreatePost = () => {
   const navigte = useNavigate();
   const [form, setForm] = useState({
@@ -19,7 +21,7 @@ const CreatePost = () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        const response = await fetch('http://localhost:8080/api/v1/dalle', {
+        const response = await fetch(`${apiUrl}/api/v1/dalle`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -46,7 +48,7 @@ const CreatePost = () => {
 
     if (form.prompt && form.photo) {
       try {
-        const response = await fetch('http://localhost:8080/api/v1/post', {
+        const response = await fetch(`${apiUrl}/api/v1/post`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
